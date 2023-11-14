@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "805302257967",
+    "project_id": "t2023it2-keepsakes",
+    "storage_bucket": "t2023it2-keepsakes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805302257967:android:9a347e581a6dc2d327b9da",
+        "android_client_info": {
+          "package_name": "com.example.keepsakesmenuapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNQZ4Ldh-YifeBT1F6AQP-lCsu6grPIYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
