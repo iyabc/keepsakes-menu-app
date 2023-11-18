@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Keepsakes Menu App</string>
-    <string name="email_placeholder">Email</string>
-    <string name="password_placeholder">Password</string>
     <string name="register_btn">Register</string>
     <string name="login_btn">Login</string>
-    <string name="logout_btn">Logout</string>
+    <string name="register_login_btn">Register &amp; Login</string>
     <string name="add_item_btn">Add Item</string>
+    <string name="logout_btn">Logout</string>
+    <string name="email_placeholder">Email</string>
+    <string name="password_placeholder">Password</string>
+    <string name="display_name_placeholder">Display Name</string>
 </resources>

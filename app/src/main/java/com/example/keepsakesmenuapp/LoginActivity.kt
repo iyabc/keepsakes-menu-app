@@ -14,9 +14,17 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.IgnoreExtraProperties
+import com.google.firebase.firestore.firestore
+import kotlin.reflect.typeOf
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    val db = Firebase.firestore
+
+    @IgnoreExtraProperties
+    data class User(val displayName: String, val email: String? = null)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -34,10 +42,15 @@ class LoginActivity : AppCompatActivity() {
             var val_password = etPass.text.toString()
 
             if(val_email.equals("") || val_password.equals("")){
-                Toast.makeText(this, "Required fields.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Fields cannot be empty.", Toast.LENGTH_LONG).show()
             }else {
                 signInEmailPass(val_email, val_password)
             }
+        }
+
+        btnRegister.setOnClickListener {
+            var intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -50,12 +63,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     fun updateUI(user: FirebaseUser?){
-
         if(user != null){
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -66,34 +74,52 @@ class LoginActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT,
             ).show()
         }
-
     }
 
-    fun signInEmailPass(email:String, passw:String){
-        var TAG = "ZZZTagFirebase"
-
+    fun firebaseSignin(email: String, passw: String, displayName: String){
         auth.signInWithEmailAndPassword(email, passw)
             .addOnCompleteListener(this){task ->
-                if(task.isSuccessful){
-                    Log.d(TAG, "signInWithEmail: success")
+                if (task.isSuccessful) {
                     val user = auth.currentUser
 
                     Toast.makeText(
                         baseContext,
-                        "Authentication successful.",
+                        "Welcome, $displayName!",
                         Toast.LENGTH_SHORT
                     ).show()
 
                     updateUI(user)
                 }else {
-                    Log.d(TAG, "signInWithEmail: failed", task.exception)
                     Toast.makeText(
                         baseContext,
-                        "Authentication failed.",
+                        "Login failed.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-        }
+            }
+    }
+
+    fun signInEmailPass(email:String, passw:String){
+        var displayName = ""
+
+        db.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener {
+                users ->
+                for(user in users){
+                    val userData = user.data
+                    displayName = userData["displayName"].toString()
+
+                }
+            }
+            .addOnCompleteListener {
+                if(!displayName.equals("")){
+                    firebaseSignin(email, passw, displayName)
+                }else{
+                    Toast.makeText(baseContext, "Login failed.", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
 }
