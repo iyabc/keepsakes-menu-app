@@ -16,6 +16,9 @@
         android:theme="@style/Theme.KeepsakesMenuApp"
         tools:targetApi="31">
         <activity
+            android:name=".ViewDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
