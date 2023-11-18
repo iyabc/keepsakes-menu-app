@@ -53,10 +53,16 @@ class RegisterActivity : AppCompatActivity() {
         if(user != null){
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
+//            Toast.makeText(
+//                baseContext,
+//                "Welcome, ${user.displayName}!",
+//                Toast.LENGTH_SHORT
+//            ).show()
         }else {
             Toast.makeText(
                 baseContext,
-                "You did not login.",
+                "Login failed.",
                 Toast.LENGTH_SHORT,
             ).show()
         }
@@ -68,38 +74,26 @@ class RegisterActivity : AppCompatActivity() {
         db.collection("users")
             .add(user)
             .addOnSuccessListener{
-                Toast.makeText(
-                    baseContext,
-                    "User added to database.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.d("ZZZZZZZZZtodatabase", "User added to database.")
             }
             .addOnFailureListener{
-                Toast.makeText(
-                    baseContext,
-                    "User not added to database.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.d("ZZZZZZZZZtodatabase", "User not added to database.")
             }
     }
 
     fun registerUser(displayName: String, email: String, password: String){
-        var TAG = "ZZZTagFirebase"
-
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "createUserWithEmail:success")
                     Toast.makeText(
                         baseContext,
                         "Registration success.",
                         Toast.LENGTH_SHORT,
                     ).show()
                     val user = auth.currentUser
-                    addNewUser(displayName, email)
+                    addNewUser(displayName, email.lowercase())
                     updateUI(user)
                 } else {
-                    Log.d("ZZZZZZZZZZZZZadsadas", task.exception?.message.toString())
                     var errorMessage = task.exception?.message
                     ?: "Authentication failed. ${task.exception?.localizedMessage}"
 
