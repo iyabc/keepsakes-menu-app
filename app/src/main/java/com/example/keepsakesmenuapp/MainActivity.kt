@@ -1,29 +1,42 @@
 package com.example.keepsakesmenuapp
 
-import android.app.ActionBar.LayoutParams
-import android.graphics.Typeface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.app.ActionBar.LayoutParams
+import android.graphics.Typeface
 import android.view.Gravity
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.view.setPadding
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import kotlin.reflect.typeOf
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    lateinit var btnLogout: Button
     val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
+        btnLogout = findViewById(R.id.btnLogout)
+
+        btnLogout.setOnClickListener {
+            Firebase.auth.signOut()
+            finish()
+        }
 
         db.collection("items")
             .get()
@@ -118,9 +131,16 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w("ZZZ",    "Error getting documents.", exception)
             }
+    }
 
-
-
-
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser === null) {
+            Log.d("ZZZZZZ", "No user logged in.")
+            val loginScreen = Intent (this, LoginActivity::class.java)
+            startActivity(loginScreen)
+        }
     }
 }

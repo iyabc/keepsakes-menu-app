@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Keepsakes Menu App</string>
-    <string name="add_item">Add Item</string>
-    <string name="log_out">LOGOUT</string>
+    <string name="email_placeholder">Email</string>
+    <string name="password_placeholder">Password</string>
+    <string name="register_btn">Register</string>
+    <string name="login_btn">Login</string>
+    <string name="logout_btn">Logout</string>
+    <string name="add_item_btn">Add Item</string>
 </resources>
