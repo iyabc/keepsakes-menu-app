@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="menuImage_dimen">105dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+</resources>
