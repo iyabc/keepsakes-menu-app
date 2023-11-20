@@ -53,12 +53,6 @@ class RegisterActivity : AppCompatActivity() {
         if(user != null){
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
-//            Toast.makeText(
-//                baseContext,
-//                "Welcome, ${user.displayName}!",
-//                Toast.LENGTH_SHORT
-//            ).show()
         }else {
             Toast.makeText(
                 baseContext,

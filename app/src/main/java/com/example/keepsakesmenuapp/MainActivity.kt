@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         btnLogout.setOnClickListener {
             Firebase.auth.signOut()
             finish()
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         db.collection("items")
