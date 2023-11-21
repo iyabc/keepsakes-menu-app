@@ -21,12 +21,14 @@ class AddItemActivity : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
     val db = Firebase.firestore
     lateinit var btnAddItemSubmit: Button
+
     @IgnoreExtraProperties
     data class Item(
         val name: String,
         val description: String,
         val price: String,
-        val dateCreated: Timestamp = Timestamp.now()
+        val dateCreated: Timestamp,
+        val photoUrl: List<String>
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,22 +39,30 @@ class AddItemActivity : AppCompatActivity(){
         val etItemName = findViewById<EditText>(R.id.etItemName)
         val etDescription = findViewById<EditText>(R.id.etDescription)
         val etPrice = findViewById<EditText>(R.id.etPrice)
+        val etImageUrlFirst = findViewById<EditText>(R.id.etImageUrlFirst)
+        val etImageUrlSecond = findViewById<EditText>(R.id.etImageUrlSecond)
 
         btnAddItemSubmit = findViewById<Button>(R.id.btnAddItemSubmit)
 
         btnAddItemSubmit.setOnClickListener {
-            var val_itemName = etItemName.text.toString()
-            var val_description = etDescription.text.toString()
-            var val_price = etPrice.text.toString()
+            val val_itemName = etItemName.text.toString()
+            val val_description = etDescription.text.toString()
+            val val_price = etPrice.text.toString()
+            val val_timestamp = Timestamp.now()
+            val val_imageUrlFirst = etImageUrlFirst.text.toString()
+            val val_imageUrlSecond = etImageUrlSecond.text.toString()
+            val val_imagesUrlArray = listOf(val_imageUrlFirst, val_imageUrlSecond)
 
-            if(val_itemName.equals("") || val_description.equals("") || val_price.equals("")){
+            if(val_itemName.equals("") || val_description.equals("") || val_price.equals("") || val_imageUrlFirst.equals("") || val_imageUrlSecond.equals("")){
                 Toast.makeText(
                     baseContext,
                     "Required fields.",
                     Toast.LENGTH_SHORT,
                 ).show()
             }else {
-                var item = Item(val_itemName, val_description, val_price)
+                Log.d("ZZZZZZZZZZZzz", val_imagesUrlArray[0].toString())
+                Log.d("ZZZZZZZZZZZzz", val_imagesUrlArray[1].toString())
+                var item = Item(val_itemName, val_description, val_price,val_timestamp, val_imagesUrlArray)
                 addItem(item)
             }
         }

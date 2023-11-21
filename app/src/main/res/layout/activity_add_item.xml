@@ -51,6 +51,22 @@
             android:inputType="number"
             android:hint="@string/price_placeholder" />
 
+        <EditText
+            android:id="@+id/etImageUrlFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Insert first image url here" />
+
+        <EditText
+            android:id="@+id/etImageUrlSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Insert second image url here" />
+
         <Button
             android:id="@+id/btnAddItemSubmit"
             android:layout_width="match_parent"
