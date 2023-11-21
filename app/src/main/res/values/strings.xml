@@ -8,5 +8,8 @@
     <string name="email_placeholder">Email</string>
     <string name="password_placeholder">Password</string>
     <string name="display_name_placeholder">Display Name</string>
+    <string name="item_name_placeholder">Item Name</string>
+    <string name="description_placeholder">Description</string>
+    <string name="price_placeholder">Price</string>
     <string name="back">Back</string>
 </resources>

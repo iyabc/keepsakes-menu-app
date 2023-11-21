@@ -25,6 +25,7 @@ import com.google.firebase.firestore.firestore
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var btnLogout: Button
+    lateinit var btnAddItem: Button
     val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +34,19 @@ class MainActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        btnLogout = findViewById(R.id.btnLogout)
+        btnLogout = findViewById<Button>(R.id.btnLogout)
+        btnAddItem = findViewById<Button>(R.id.btnAddItem)
 
         btnLogout.setOnClickListener {
             Firebase.auth.signOut()
             finish()
             var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnAddItem.setOnClickListener {
+            finish()
+            var intent = Intent(this, AddItemActivity::class.java)
             startActivity(intent)
         }
 
@@ -150,12 +158,12 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-//         Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser === null) {
-            Log.d("ZZZZZZ", "No user logged in.")
-            val loginScreen = Intent (this, LoginActivity::class.java)
-            startActivity(loginScreen)
-        }
+
+//        val currentUser = auth.currentUser
+//        if (currentUser === null) {
+//            Log.d("ZZZZZZ", "No user logged in.")
+//            val loginScreen = Intent (this, LoginActivity::class.java)
+//            startActivity(loginScreen)
+//        }
     }
 }
