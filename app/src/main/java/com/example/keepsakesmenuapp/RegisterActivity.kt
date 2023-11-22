@@ -52,6 +52,7 @@ class RegisterActivity : AppCompatActivity() {
     fun updateUI(user: FirebaseUser?){
         if(user != null){
             var intent = Intent(this, MainActivity::class.java)
+            finish()
             startActivity(intent)
         }else {
             Toast.makeText(

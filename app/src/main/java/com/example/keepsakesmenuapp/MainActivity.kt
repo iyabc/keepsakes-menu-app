@@ -159,11 +159,11 @@ class MainActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
 
-//        val currentUser = auth.currentUser
-//        if (currentUser === null) {
-//            Log.d("ZZZZZZ", "No user logged in.")
-//            val loginScreen = Intent (this, LoginActivity::class.java)
-//            startActivity(loginScreen)
-//        }
+        val currentUser = auth.currentUser
+        if (currentUser === null) {
+            Log.d("ZZZZZZ", "No user logged in.")
+            val loginScreen = Intent (this, LoginActivity::class.java)
+            startActivity(loginScreen)
+        }
     }
 }

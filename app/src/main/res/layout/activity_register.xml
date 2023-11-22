@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="@string/display_name_placeholder" />
+                android:hint="@string/display_name_placeholder" />
 
             <EditText
                 android:id="@+id/etRegisterEmail"
@@ -38,14 +38,15 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="@string/email_placeholder" />
+                android:hint="@string/email_placeholder" />
 
             <EditText
                 android:id="@+id/etRegisterPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:hint="@string/password_placeholder"  />
 
             <Button
                 android:id="@+id/registerLoginBtn"

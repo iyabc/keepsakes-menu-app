@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             var intent = Intent(this, RegisterActivity::class.java)
+            finish()
             startActivity(intent)
         }
     }
@@ -66,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
     fun updateUI(user: FirebaseUser?){
         if(user != null){
             var intent = Intent(this, MainActivity::class.java)
+            finish()
             startActivity(intent)
         }else {
             Toast.makeText(
