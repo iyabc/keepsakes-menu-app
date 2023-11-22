@@ -61,14 +61,6 @@ class MainActivity : AppCompatActivity() {
                     val price = String.format("P %.2f", document.data["price"].toString().toFloat())
                     val description = document.data["description"].toString()
 
-                    if(imgArray != null){
-                        Log.d("ZZZ", "${imgArray}")
-                        Log.d("ZZZ", "Image one: ${imgArray[0]}")
-                        Log.d("ZZZ", "Image two: ${imgArray[1]}")
-                    }
-
-
-
                     val listLayout = findViewById<LinearLayout>(R.id.listLayout)
 
                     val cardView = CardView(this)

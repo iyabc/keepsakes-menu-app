@@ -74,11 +74,10 @@ class AddItemActivity : AppCompatActivity(){
     }
 
     fun addItem(item: Item){
-        var TAG = "ZZZZZZadditem"
 
         db.collection("items")
             .add(item)
-            .addOnSuccessListener { documentReference ->
+            .addOnSuccessListener {
                 Toast.makeText(
                     baseContext,
                     "${item.name} added.",
